@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-1
+spec:
+  selector:
+    matchLabels:
+      greeting: hello
+      version: one
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        greeting: hello
+        version: one
+    spec:
+      containers:
+      - name: hello-app-1
+        image: "us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0"
+        env:
+        - name: "PORT"
+          value: "5001"
+        resources:
+            requests:
+                memory: "32Mi"
+                cpu: "50m"
+            limits:
+                memory: "64Mi"
+                cpu: "100m"
